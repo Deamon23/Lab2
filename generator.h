@@ -1,11 +1,17 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
-#include <memory>
+#include "cplusplus/classunit.h"
+#include "cplusplus/methodunit.h"
+#include "cplusplus/printoperatorunit.h"
 
-#include "classunit.h"
-#include "methodunit.h"
-#include "printoperatorunit.h"
+#include "csharp/classunit.h"
+#include "csharp/methodunit.h"
+#include "csharp/printoperatorunit.h"
+
+#include "java/classunit.h"
+#include "java/methodunit.h"
+#include "java/printoperatorunit.h"
 
 std::string generateProgram() {
     ClassUnit myClass( "MyClass" );
