@@ -1,7 +1,7 @@
 #ifndef METHODUNIT_H
 #define METHODUNIT_H
 
-#include "unit.h"
+#include "../unit.h"
 
 class MethodUnit : public Unit {
 public:

@@ -1,7 +1,7 @@
 #ifndef CLASSUNIT_H
 #define CLASSUNIT_H
 
-#include "unit.h"
+#include "../unit.h"
 
 class ClassUnit : public Unit
 {
