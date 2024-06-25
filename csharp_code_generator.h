@@ -1,32 +1,32 @@
 #ifndef CSHARP_CODE_GENERATOR_H
 #define CSHARP_CODE_GENERATOR_H
 
-#include "code_generator.h"
+#include "code_factory.h"
 
 // Класс для генерации кода на C#
 class CSharpCodeGenerator : public CodeGenerator {
 public:
-    // Генерация кода для класса на C#
-    std::string generateClass(const std::string& className) const override {
-        return "public class " + className + " {\n";
-    }
+    std::string generateProgram() const override {
+        ClassUnit myClass( "MyClass" );
 
-    // Генерация кода для метода на C#
-    std::string generateMethod(const std::string& methodName, const std::string& returnType, unsigned int flags) const override {
-        std::string result;
-        if (flags & MethodUnit::STATIC) {
-            result += "static ";
-        }
-        if (flags & MethodUnit::VIRTUAL) {
-            result += "virtual ";
-        }
-        result += returnType + " " + methodName + "() {\n";
-        return result;
-    }
+        myClass.add(
+            std::make_shared< MethodUnit >( "TestFunc1", "void", 0 ),
+            ClassUnit::PUBLIC
+            );
+        myClass.add(
+            std::make_shared< MethodUnit >( "TestFunc2", "void", MethodUnit::STATIC ),
+            ClassUnit::PRIVATE
+            );
+        myClass.add(
+            std::make_shared< MethodUnit >( "TestFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ),
+            ClassUnit::PUBLIC
+            );
 
-    // Генерация кода для оператора печати на C#
-    std::string generatePrint(const std::string& text) const override {
-        return "Console.WriteLine(\"" + text + "\");\n";
+        auto method = std::make_shared< MethodUnit >( "TestFunc4", "void", MethodUnit::STATIC );
+        method->add( std::make_shared< PrintOperatorUnit >( R"(Hello, world!\n)" ) );
+        myClass.add( method, ClassUnit::PROTECTED );
+
+        return myClass.compile();
     }
 };
 
